@@ -1,0 +1,8 @@
+﻿# Coloca este archivo como .htaccess en el hosting de .com y .eu
+# Redirige todo a https://novaestudioweb.es
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTP_HOST} ^(www\.)?novaestudioweb\.com$ [NC,OR]
+  RewriteCond %{HTTP_HOST} ^(www\.)?novaestudioweb\.eu$ [NC]
+  RewriteRule ^(.*)$ https://novaestudioweb.es/$1 [R=301,L]
+</IfModule>

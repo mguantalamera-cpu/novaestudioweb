@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NovaEstudioWeb Admin</title>
+  <link rel="stylesheet" href="../css/styles.css"/>
+  <link rel="stylesheet" href="admin.css"/>
+</head>
+<body class="admin-body" data-api-base="https://api.novaestudioweb.com">
+  <header class="admin-header">
+    <div class="admin-brand">NovaEstudioWeb Admin</div>
+    <button class="boton boton--ghost" id="refreshList" type="button">Actualizar</button>
+  </header>
+
+  <main class="admin-main">
+    <section class="admin-panel">
+      <h2>Acceso</h2>
+      <form id="loginForm" class="admin-login">
+        <label>
+          Usuario
+          <input type="text" id="adminUser" required />
+        </label>
+        <label>
+          Contraseña
+          <input type="password" id="adminPass" required />
+        </label>
+        <button class="boton" type="submit">Entrar</button>
+        <p class="admin-hint">Credenciales configuradas en el servidor (ADMIN_BASIC_USER / ADMIN_BASIC_PASS).</p>
+      </form>
+      <p class="admin-status" id="adminStatus"></p>
+    </section>
+
+    <section class="admin-panel">
+      <h2>Conversaciones</h2>
+      <div class="admin-list" id="convoList"></div>
+    </section>
+
+    <section class="admin-panel">
+      <h2>Detalle</h2>
+      <div id="convoDetail" class="admin-detail">
+        <p>Selecciona una conversación para ver los detalles.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="admin.js"></script>
+</body>
+</html>

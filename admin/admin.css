@@ -1,0 +1,113 @@
+.admin-body{
+  background: var(--color-fondo);
+}
+.admin-header{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--borde);
+  background: rgba(255,255,255,0.9);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.admin-brand{
+  font-family: var(--fuente-titulo);
+  font-weight: 900;
+  font-size: 1.1rem;
+}
+.admin-main{
+  display:grid;
+  grid-template-columns: 1fr 1fr 1.2fr;
+  gap: 16px;
+  padding: 20px;
+}
+.admin-panel{
+  background: var(--color-superficie);
+  border: 1px solid var(--borde);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--sombra-soft);
+}
+.admin-login{
+  display:flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.admin-login label{
+  display:flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.admin-status{
+  margin-top: 10px;
+  font-weight: 800;
+  color: rgba(11,18,32,0.75);
+}
+.admin-hint{
+  color: rgba(11,18,32,0.55);
+  font-weight: 650;
+  font-size: 0.9rem;
+}
+.admin-list{
+  display:flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 70vh;
+  overflow:auto;
+}
+.admin-item{
+  border: 1px solid var(--borde);
+  border-radius: 14px;
+  padding: 10px 12px;
+  display:flex;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+}
+.admin-item:hover{ background: rgba(14,165,233,0.06); }
+.admin-item small{ color: rgba(11,18,32,0.6); }
+.admin-detail{
+  display:flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.admin-actions{
+  display:flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.admin-badge{
+  display:inline-flex;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(14,165,233,0.18);
+  background: rgba(14,165,233,0.08);
+  font-weight: 900;
+}
+.admin-messages{
+  display:flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 45vh;
+  overflow: auto;
+}
+.admin-msg{
+  border-radius: 12px;
+  padding: 8px 10px;
+  border: 1px solid rgba(15,23,42,0.10);
+  background: rgba(15,23,42,0.04);
+}
+.admin-msg.user{ background: rgba(14,165,233,0.08); }
+.admin-json{
+  background: #0b1220;
+  color: #e2e8f0;
+  padding: 10px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  overflow: auto;
+}
+@media (max-width: 1100px){
+  .admin-main{ grid-template-columns: 1fr; }
+}

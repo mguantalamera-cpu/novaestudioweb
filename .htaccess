@@ -1,0 +1,26 @@
+# Evita listado de directorios
+Options -Indexes
+
+# Redirecciones 301 de dominios secundarios a dominio principal (.es)
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTP_HOST} ^www\.novaestudioweb\.es$ [NC]
+  RewriteRule ^(.*)$ https://novaestudioweb.es/$1 [R=301,L]
+
+  RewriteCond %{HTTP_HOST} ^(www\.)?novaestudioweb\.com$ [NC,OR]
+  RewriteCond %{HTTP_HOST} ^(www\.)?novaestudioweb\.eu$ [NC]
+  RewriteRule ^(.*)$ https://novaestudioweb.es/$1 [R=301,L]
+</IfModule>
+
+# Seguridad de cabeceras (lista para producción)
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "DENY"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=(), fullscreen=(self)"
+  Header always set X-Permitted-Cross-Domain-Policies "none"
+  Header always set Cross-Origin-Opener-Policy "same-origin"
+  Header always set Cross-Origin-Resource-Policy "same-origin"
+  Header always set Content-Security-Policy "default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; img-src 'self' data:; script-src 'self' 'sha256-p/Lha8La61/TDPKtx3275gX/cF8QseAzbvUnSjHidPE=' 'sha256-HjzVPJuQkQb1ytSGyiZYAaRy4bUPrf/9++iwtKVEQTQ='; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://api.novaestudioweb.com; upgrade-insecure-requests"
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+</IfModule>
