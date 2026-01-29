@@ -1,5 +1,5 @@
 (() => {
-  const WHATSAPP_NUMBER = "34600063369"; // solo dÃ­gitos, sin +
+  const WHATSAPP_NUMBER = "34600063369"; // solo digitos, sin +
   const COOKIE_KEY = "nova_cookie_accepted_v1";
 
   const yearEl = document.getElementById("year");
@@ -57,13 +57,13 @@
     cookieAccept.addEventListener("click", () => {
       localStorage.setItem(COOKIE_KEY, "1");
       if (cookieBanner) cookieBanner.hidden = true;
-      showToast("âœ… Preferencia guardada");
+      showToast("\u2705 Preferencia guardada");
     });
   }
 
   const openWhatsApp = (text) => {
     if (!WHATSAPP_NUMBER || WHATSAPP_NUMBER.includes("TU_")) {
-      showToast("âš ï¸ Falta configurar el WhatsApp en scripts.js");
+      showToast("\u26a0\ufe0f Falta configurar el WhatsApp en scripts.js");
       return;
     }
     const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
@@ -75,7 +75,7 @@
   if (contactWhatsapp) {
     contactWhatsapp.addEventListener("click", (e) => {
       e.preventDefault();
-      openWhatsApp("Hola, quiero informaciÃ³n sobre una web con NovaEstudioWeb.");
+      openWhatsApp("Hola, quiero informaci\u00f3n sobre una web con NovaEstudioWeb.");
     });
   }
 
@@ -83,7 +83,7 @@
   if (whatsappFloat) {
     whatsappFloat.addEventListener("click", (e) => {
       e.preventDefault();
-      const text = "Hola, quiero informaciÃ³n sobre una web con NovaEstudioWeb.";
+      const text = "Hola, quiero informaci\u00f3n sobre una web con NovaEstudioWeb.";
       openWhatsApp(text);
     });
   }
@@ -106,7 +106,7 @@
   let lastSummary = "";
   let history = [];
 
-  const greetMessage = "Hola, Â¿quÃ© tipo de web quieres crear? (empresa, portfolio, ecommerceâ€¦)";
+  const greetMessage = "Hola, \u00bfqu\u00e9 tipo de web quieres crear? (empresa, portfolio, ecommerce\u2026)";
 
   const addMessage = (role, text) => {
     if (!chatLog) return;
@@ -176,7 +176,7 @@
 
   const sendMessage = async () => {
     if (!chatInput || !chatEndpoint) {
-      showToast("âš ï¸ Falta configurar el endpoint del chat.");
+      showToast("\u26a0\ufe0f Falta configurar el endpoint del chat.");
       return;
     }
     const text = chatInput.value.trim();
@@ -213,17 +213,17 @@
         conversationId = data.conversation_id || conversationId;
         lastSummary = data.whatsapp_summary || lastSummary;
         if (data.status === "PENDING_OWNER_APPROVAL") {
-          setChatStatus("Tu solicitud estÃ¡ en revisiÃ³n por el equipo.");
+          setChatStatus("Tu solicitud est\u00e1 en revisi\u00f3n por el equipo.");
         } else {
           setChatStatus("");
         }
       } else {
-        showToast("âŒ No se pudo responder. Intenta de nuevo.");
-        addMessage("ai", "Ahora mismo tengo un problema tÃ©cnico. Â¿Quieres que lo intentemos otra vez?");
+        showToast("\u274c No se pudo responder. Intenta de nuevo.");
+        addMessage("ai", "Ahora mismo tengo un problema t\u00e9cnico. \u00bfQuieres que lo intentemos otra vez?");
       }
     } catch (err) {
-      showToast("âŒ Error de conexiÃ³n.");
-      addMessage("ai", "No puedo conectar en este momento. Â¿Quieres que lo intentemos mÃ¡s tarde?");
+      showToast("\u274c Error de conexi\u00f3n.");
+      addMessage("ai", "No puedo conectar en este momento. \u00bfQuieres que lo intentemos m\u00e1s tarde?");
     } finally {
       if (chatTyping) chatTyping.hidden = true;
       if (chatSend) chatSend.disabled = false;
@@ -243,7 +243,7 @@
   if (chatNew) {
     chatNew.addEventListener("click", () => {
       resetConversation();
-      showToast("âœ… Nueva conversaciÃ³n");
+      showToast("\u2705 Nueva conversaci\u00f3n");
     });
   }
 
@@ -254,7 +254,7 @@
         .map((m) => `- ${m.content}`)
         .join("\n");
 
-      const summary = lastSummary || `Resumen de lo hablado:\n${fallbackSummary || "- Sin detalles aÃºn."}`;
+      const summary = lastSummary || `Resumen de lo hablado:\n${fallbackSummary || "- Sin detalles a\u00fan."}`;
       openWhatsApp(summary);
     });
   }
@@ -263,7 +263,7 @@
     cta.addEventListener("click", (e) => {
       e.preventDefault();
       selectedPlan = cta.dataset.plan || "Paquete";
-      showToast(`âœ… Plan seleccionado: ${selectedPlan}`);
+      showToast(`\u2705 Plan seleccionado: ${selectedPlan}`);
       openChat();
     });
   });
