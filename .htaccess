@@ -1,26 +1,19 @@
-# Evita listado de directorios
+# NovaEstudioWeb - seguridad base + CSP compatible con el asistente IA
 Options -Indexes
 
-# Redirecciones 301 de dominios secundarios a dominio principal (.es)
-<IfModule mod_rewrite.c>
-  RewriteEngine On
-  RewriteCond %{HTTP_HOST} ^www\.novaestudioweb\.es$ [NC]
-  RewriteRule ^(.*)$ https://novaestudioweb.es/$1 [R=301,L]
+# Fuerza HTTPS (si el servidor ya tiene SSL activo)
+RewriteEngine On
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-  RewriteCond %{HTTP_HOST} ^(www\.)?novaestudioweb\.com$ [NC,OR]
-  RewriteCond %{HTTP_HOST} ^(www\.)?novaestudioweb\.eu$ [NC]
-  RewriteRule ^(.*)$ https://novaestudioweb.es/$1 [R=301,L]
-</IfModule>
+# Cabeceras de seguridad básicas
+Header always set X-Content-Type-Options "nosniff"
+Header always set X-Frame-Options "DENY"
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+Header always set X-XSS-Protection "0"
+Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
 
-# Seguridad de cabeceras (lista para producción)
-<IfModule mod_headers.c>
-  Header always set X-Content-Type-Options "nosniff"
-  Header always set X-Frame-Options "DENY"
-  Header always set Referrer-Policy "strict-origin-when-cross-origin"
-  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=(), fullscreen=(self)"
-  Header always set X-Permitted-Cross-Domain-Policies "none"
-  Header always set Cross-Origin-Opener-Policy "same-origin"
-  Header always set Cross-Origin-Resource-Policy "same-origin"
-  Header always set Content-Security-Policy "default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; img-src 'self' data:; script-src 'self' 'sha256-p/Lha8La61/TDPKtx3275gX/cF8QseAzbvUnSjHidPE=' 'sha256-HjzVPJuQkQb1ytSGyiZYAaRy4bUPrf/9++iwtKVEQTQ='; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://api.novaestudioweb.com; upgrade-insecure-requests"
-  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
-</IfModule>
+# CSP: permite scripts inline (JSON-LD) y conexión a la API
+Header always set Content-Security-Policy "default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; img-src 'self' data: https:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://api.novaestudioweb.com https://api.novaestudioweb.es https://api.novaestudioweb.eu; upgrade-insecure-requests"
+
