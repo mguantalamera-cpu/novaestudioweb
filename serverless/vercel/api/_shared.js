@@ -16,7 +16,10 @@ export const getSupabase = () => {
 };
 
 export const applyCors = (req, res) => {
-  const allowed = (process.env.ALLOWED_ORIGIN || "").split(",").map(v => v.trim()).filter(Boolean);
+  const allowed = (process.env.ALLOWED_ORIGIN || "")
+    .split(/[\s,]+/)
+    .map(v => v.trim())
+    .filter(Boolean);
   const origin = req.headers.origin || "";
 
   if (allowed.length && origin && !allowed.includes(origin)) {
